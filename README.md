@@ -17,7 +17,7 @@ en un mapa con paredes. Verás en tiempo real cómo tu agente toma decisiones.
 
 ### 1. Abre `mi_agente.py`
 
-Ahí encontrarás la clase `MiAgente` con el método `decidir()` vacío.
+Ahí encontrarás la clase `MiAgente` con el método `decidir()`.
 Tu trabajo es programar la lógica de decisión.
 
 ### 2. Lo que recibes
@@ -82,3 +82,26 @@ En `main.py` puedes cambiar:
 - Puedes agregar atributos a tu clase (`self.memoria`, `self.pasos`, etc.)
   para que tu agente recuerde cosas.
 - Prueba con diferentes semillas para verificar que tu agente es robusto.
+
+---
+
+## Descripción técnica del agente
+
+El agente fue implementado en el archivo `mi_agente.py` a partir de la clase base `Agente`. La lógica principal se encuentra en el método `decidir(percepcion)`, que se ejecuta en cada paso de la simulación.
+
+Para mejorar su comportamiento, se implementaron los siguientes elementos:
+
+- **Memoria de estados visitados:**  
+  Se utiliza un `set` para almacenar las posiciones ya recorridas, evitando que el agente repita rutas innecesarias.
+
+- **Control de retroceso:**  
+  Se guarda la posición anterior para evitar que el agente regrese inmediatamente a la celda previa.
+
+- **Validación de movimientos:**  
+  Se filtran las direcciones disponibles, descartando aquellas que contienen paredes o están fuera del mapa.
+
+- **Dirección hacia la meta:**  
+  Se usa `direccion_meta` como referencia para orientar el movimiento, sin depender completamente de ella.
+
+- **Exploración con aleatoriedad:**  
+  Se emplea la librería `random` para elegir entre múltiples opciones válidas, priorizando celdas no visitadas. Esto permite que el agente genere rutas distintas en cada ejecución.
